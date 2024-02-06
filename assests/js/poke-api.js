@@ -14,11 +14,10 @@ function convertPokemonDetailToPokemon(pokeDetail) {
 
     pokemon.photo = pokeDetail.sprites.other.dream_world.front_default;
 
-    pokemon.species = pokeDetail.species;
+    pokemon.species = pokeDetail.species.name;
     pokemon.height = pokeDetail.height;
-    // console.log("Aqui " + pokemon.height);
     pokemon.weight = pokeDetail.weight;
-    // pokemon.abilities = pokeDetail.abilities.map(ability.name);
+    pokemon.abilities = pokeDetail.abilities.map((abilityObj) => abilityObj.ability.name).join(', ');
 
     return pokemon;
 }
