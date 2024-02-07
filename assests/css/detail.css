@@ -62,13 +62,14 @@
 }
 
 .details .detail-options span {
+    border-bottom: 2px solid #6F7BDB;
     padding: 1.27rem 0;
 }
 
-.details .detail-options span:hover {
+/* .details .detail-options span:hover {
     border-bottom: 2px solid #6F7BDB;
     cursor: pointer;
-}
+} */
 
 .details .info-pokemon {
     font-size: 1rem;
