@@ -1,45 +1,13 @@
-// const idPokemon = document.querySelector('.id-pokemon');
-// const details = document.querySelector('.details');
-
-
-// // Extrair o ID do Pokémon da URL
-// const params = new URLSearchParams(window.location.search);
-// const pokemonId = params.get('id');
-
-// // Agora você pode usar o pokemonId para carregar os detalhes do Pokémon correspondente
-
-
-
-
-// function convertIdPokemonToHtml(pokemon) {
-
-//     return `
-//         <div class="id">
-//             <spam class="name">${pokemon.name}</spam>
-//             <span class="number">#${pokemon.number}</span>
-//         </div>
-//         <div class="types">
-//             ${pokemon.types.map((type) => `<span class="type ${type}">${type}</span>`).join('')}
-//         </div>
-//         <img src="${pokemon.photo}"
-//              alt="${pokemon.name}"
-//         >
-//     `
-// }
-
-// function loadPokemonDetails() {
-//     pokeApi.getPokemonsDetail().then((pokemons = []) => {
-//         const newHtml = pokemons.map(convertIdPokemonToHtml).join('')
-//         pokemonList.innerHTML += newHtml
-//     })
-// }
-
 
 const idPokemon = document.querySelector('.id-pokemon');
 const infoPokemon = document.querySelector('.info-pokemon');
+const moreInfoPokemon = document.querySelector('#moreInfo');
 const details = document.querySelector('.details');
 
-const pokemonId = 1;//params.get('id');
+// const pokemonId = 5;//params.get('id');
+
+const params = new URLSearchParams(window.location.search);
+const pokemonId = params.get('id');
 
 
 pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}` })
@@ -47,7 +15,8 @@ pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}
     
         idPokemon.innerHTML = convertIdPokemonToHtml(pokemon);
         infoPokemon.innerHTML = convertInfoPokemonToHtml(pokemon);
-       
+        moreInfoPokemon.innerHTML = convertBreedPokemonToHtml(pokemon);
+        updateBackgroundColor(pokemon.type);
     })
     .catch((error) => {
         console.error("Erro ao obter detalhes do Pokémon:", error);
@@ -90,3 +59,27 @@ function convertInfoPokemonToHtml(pokemon) {
         </li>
     `
 }
+
+function convertBreedPokemonToHtml(pokemon) {
+    return `
+        <li class="info">
+            <span>Gender</span>
+            <span>${pokemon.genders}</span>
+        </li>
+        <li class="info">
+            <span>Egg Groups</span>
+            <span>${pokemon.eggGroups}</span>
+        </li>
+        <li class="info">
+            <span>Egg Cycles</span>
+            <span>${pokemon.eggCycles}</span>
+        </li>
+    `
+}
+
+function updateBackgroundColor(type) {
+    const contentDetail = document.getElementById('content-detail');
+    contentDetail.className = 'content';
+    contentDetail.classList.add(type.toLowerCase());
+}
+

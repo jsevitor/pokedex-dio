@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
-
+    
     <!-- CSS -->
     <link rel="stylesheet" href="assests/css/global.css">
     <link rel="stylesheet" href="assests/css/pokedex.css">
@@ -26,37 +26,26 @@
 
     <section class="content" id="content-detail">
         <header class="id-pokemon">
-
+            <!-- Pokemon Identification Here -->
         </header>
 
         <div class="details">
-            <header>
-                <span>About</span>
-            </header>
-            <ul class="info-pokemon">
-
-            </ul>
-            <header>
-                <span>Breeding</span>
-            </header>
-            <ul class="info-pokemon" id="moreInfo">
-                <li class="info">
-                    <span>Gender</span>
-                    <span>${pokemon.species}</span>
-                </li>
-                <li class="info">
-                    <span>Egg Group</span>
-                    <span>${pokemon.height}</span>
-                </li>
-                <li class="info">
-                    <span>Egg Cicle</span>
-                    <span>${pokemon.weight}</span>
-                </li>
-            </ul>
+            <div class="detail">
+                <header class="detail-options">
+                    <span>About</span>
+                </header>
+                <ul class="info-pokemon">
+                    <!-- Pokemon Information Here -->
+                </ul>
+                <header>
+                    <span>Breeding</span>
+                </header>
+                <ul class="info-pokemon" id="moreInfo">
+                    <!-- Breeding Information Here -->
+                </ul>
+            </div>
         </div>
     </section>
-
-
 
     <!-- JavaScript -->
     <script src="assests/js/pokemon-model.js"></script>
