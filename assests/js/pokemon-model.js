@@ -9,7 +9,8 @@ class Pokemon {
     height;
     weight;
     abilities = [];
-    // gender = [];
-    // eggGroups;
-    // eggCicle;
+    gender = [];
+    eggGroups;
+    eggCicle;
+    stats = [];
 }

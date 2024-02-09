@@ -52,25 +52,26 @@
 }
 
 .details header {
-    margin: 1.5rem 0;
-    padding: 0 1.27rem;
+    margin: 1rem 0;
+    /* padding: 0 1.27rem; */
 }
 
 .details .detail-options {
-    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
     height: 2.5rem;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
 }
 
 .details .detail-options span {
     border-bottom: 2px solid #6F7BDB;
-    padding: 1.27rem 0;
+    padding: 1.16rem 0;
 }
 
 /* .details .detail-options span:hover {
     border-bottom: 2px solid #6F7BDB;
     cursor: pointer;
 } */
-
 .details .info-pokemon {
     font-size: 1rem;
     font-weight: 300;
@@ -79,18 +80,44 @@
     padding: 0;
     margin: 0;
 }
-
-.details .info-pokemon .info {
+.details .info-pokemon .info,
+.stats .stat {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: .4rem 1.27rem;
 }
 
 
+
+/* BASE STATS */
+.stats {
+    /* margin: 2rem 0; */
+    padding: 0;
+    list-style: none;
+    font-weight: 300;
+    text-transform: capitalize;
+    font-size: .825rem;
+}
+.stats .stat {
+    grid-template-columns: 2fr 1fr 3fr;
+}
+.stats .stat .stat-progress {
+    width: 100%;
+    height: .5rem;
+    background-color: #e2e1e1;
+    border-radius: .5rem;
+}
+.stats .stat .stat-progress .progress-value {
+    /* width: 30%; */
+    height: .5rem;
+    background-color: #6F7BDB;
+    border-radius: .5rem;
+}
+
+
 @media screen and (min-width: 380px) {
     
 }
-
 @media screen and (min-width: 576px) {
     .id-pokemon .id .name {
         font-size: 2.5rem;
@@ -102,7 +129,6 @@
         margin: 0 2rem;
     }
 }
-
 @media screen and (min-width: 900px) {
     .id-pokemon .id .name {
         font-size: 3rem;
@@ -113,7 +139,8 @@
     .id-pokemon, .detail {
         margin: 0 2rem;
     }
-    .details .info-pokemon {
+    .details .info-pokemon,
+    .stats {
         font-size: 1.2rem;
     }
 }

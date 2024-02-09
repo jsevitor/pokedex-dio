@@ -20,8 +20,12 @@ function convertPokemonDetailToPokemon(pokeDetail, speciesName, eggGroups, eggCy
 
     pokemon.genders = genders;
     pokemon.eggGroups = eggGroups; 
-    pokemon.eggCycles = eggCycles; 
+    pokemon.eggCycles = eggCycles;
 
+    pokemon.stats = pokeDetail.stats;
+    pokemon.statsNames = pokeDetail.stats.map((statsObj) => statsObj.stat.name);
+    pokemon.statsBase = pokeDetail.stats.map((base_statsObj) => base_statsObj.base_stat);
+    
     return pokemon;
 }
 
@@ -91,6 +95,6 @@ pokeApi.getPokemonGenders = (speciesUrl) => {
         });
 }
 
-pokeApi.getPokemons().then((pokemons) => {
-    console.log(pokemons);
-});
+// pokeApi.getPokemons().then((pokemons) => {
+//     console.log(pokemons);
+// });

@@ -3,8 +3,8 @@ const idPokemon = document.querySelector('.id-pokemon');
 const infoPokemon = document.querySelector('.info-pokemon');
 const moreInfoPokemon = document.querySelector('#moreInfo');
 const details = document.querySelector('.details');
-
-// const pokemonId = 5;//params.get('id');
+const stats = document.querySelector('.stats');
+const progress = document.querySelector('.progress-value');
 
 const params = new URLSearchParams(window.location.search);
 const pokemonId = params.get('id');
@@ -16,6 +16,7 @@ pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}
         idPokemon.innerHTML = convertIdPokemonToHtml(pokemon);
         infoPokemon.innerHTML = convertInfoPokemonToHtml(pokemon);
         moreInfoPokemon.innerHTML = convertBreedPokemonToHtml(pokemon);
+        stats.innerHTML += convertStatsPokemonToHtml(pokemon);
         updateBackgroundColor(pokemon.type);
     })
     .catch((error) => {
@@ -76,6 +77,25 @@ function convertBreedPokemonToHtml(pokemon) {
         </li>
     `
 }
+
+function convertStatsPokemonToHtml(pokemon) {
+    let html = '';
+    for (let i = 0; i < pokemon.statsNames.length; i++) {
+
+        html += `
+            <li class="stat">
+                <span class="stat-name">${pokemon.statsNames[i]}</span>
+                <span class="stat-value">${pokemon.statsBase[i]}</span>
+                <span class="stat-progress">
+                    <div class="progress-value" style="width: ${pokemon.statsBase[i]}%"></div>
+                </span>
+            </li>
+        `;
+    }
+    return html;
+}
+
+
 
 function updateBackgroundColor(type) {
     const contentDetail = document.getElementById('content-detail');
