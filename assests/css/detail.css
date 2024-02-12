@@ -4,6 +4,11 @@
     padding: 1rem .5rem;
     gap: .5rem;
     color: #fff;
+
+    /* background-image: url('../images/pokeball.png');
+    background-repeat: no-repeat;
+    background-position: top 20px right; */
+
 }
 
 .id-pokemon .id {
@@ -110,7 +115,7 @@
 .stats .stat .stat-progress .progress-value {
     /* width: 30%; */
     height: .5rem;
-    background-color: #6F7BDB;
+    /* background-color: #6F7BDB; */
     border-radius: .5rem;
 }
 

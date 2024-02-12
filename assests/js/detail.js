@@ -31,7 +31,7 @@ function convertIdPokemonToHtml(pokemon) {
     return `
         <div class="id">
             <span class="name">${pokemon.name}</span>
-            <span class="number">#${pokemon.number}</span>
+            <span class="number">#${String(pokemon.number).padStart(3, '0')}</span>
         </div>
         <div class="types">
             ${pokemon.types.map((type) => `<span class="type ${type}">${type}</span>`).join('')}
@@ -81,13 +81,13 @@ function convertBreedPokemonToHtml(pokemon) {
 function convertStatsPokemonToHtml(pokemon) {
     let html = '';
     for (let i = 0; i < pokemon.statsNames.length; i++) {
-
+        let totalStats =+ pokemon.statsBase[i];
         html += `
             <li class="stat">
                 <span class="stat-name">${pokemon.statsNames[i]}</span>
                 <span class="stat-value">${pokemon.statsBase[i]}</span>
                 <span class="stat-progress">
-                    <div class="progress-value" style="width: ${pokemon.statsBase[i]}%"></div>
+                    <div class="progress-value ${pokemon.type}" style="width: ${pokemon.statsBase[i]}%"></div>
                 </span>
             </li>
         `;
