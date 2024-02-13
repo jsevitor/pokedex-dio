@@ -12,7 +12,7 @@ const pokemonId = params.get('id');
 
 pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}` })
     .then((pokemon) => {
-    
+
         idPokemon.innerHTML = convertIdPokemonToHtml(pokemon);
         infoPokemon.innerHTML = convertInfoPokemonToHtml(pokemon);
         moreInfoPokemon.innerHTML = convertBreedPokemonToHtml(pokemon);
@@ -23,9 +23,13 @@ pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}
         console.error("Erro ao obter detalhes do Pokémon:", error);
     });
 
-const convertMeasures = ((value) => {
-    return value/10;
-});
+const convertMeasures = (element, value) => {
+    if (element === 'height') {
+        return value * 10;
+    } else if (element === 'weight') {
+        return value / 10;
+    }
+};
 
 function convertIdPokemonToHtml(pokemon) {
     return `
@@ -48,11 +52,11 @@ function convertInfoPokemonToHtml(pokemon) {
         </li>
         <li class="info">
             <span>Height</span>
-            <span>${convertMeasures(pokemon.height)} cm</span>
+            <span id="height">${convertMeasures('height', pokemon.height)} cm</span>
         </li>
         <li class="info">
             <span>Weight</span>
-            <span>${convertMeasures(pokemon.weight)} Kg</span>
+            <span id="weight">${convertMeasures('weight', pokemon.weight)} Kg</span>
         </li>
         <li class="info">
             <span>Abilities</span>
@@ -71,17 +75,19 @@ function convertBreedPokemonToHtml(pokemon) {
             <span>Egg Groups</span>
             <span>${pokemon.eggGroups}</span>
         </li>
+        <!--
         <li class="info">
             <span>Egg Cycles</span>
             <span>${pokemon.eggCycles}</span>
         </li>
+        --!>
     `
 }
 
 function convertStatsPokemonToHtml(pokemon) {
     let html = '';
     for (let i = 0; i < pokemon.statsNames.length; i++) {
-        let totalStats =+ pokemon.statsBase[i];
+        let totalStats = + pokemon.statsBase[i];
         html += `
             <li class="stat">
                 <span class="stat-name">${pokemon.statsNames[i]}</span>
@@ -102,4 +108,19 @@ function updateBackgroundColor(type) {
     contentDetail.className = 'content';
     contentDetail.classList.add(type.toLowerCase());
 }
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const detailOptions = document.querySelectorAll('.detail-options .options');
+//     const contentSections = document.querySelectorAll('.info-pokemon, .stats'); 
+
+//     detailOptions.forEach((option, index) => {
+//         option.addEventListener('click', function() {
+//             contentSections.forEach(section => {
+//                 section.style.display = 'none';
+//                 section.style.borderBottom = '2px solid #6F7BDB';
+//             });
+//             contentSections[index].style.display = 'block';
+//         });
+//     });
+// });
 
