@@ -1,7 +1,6 @@
 
 const idPokemon = document.querySelector('.id-pokemon');
 const infoPokemon = document.querySelector('.info-pokemon');
-const moreInfoPokemon = document.querySelector('#moreInfo');
 const details = document.querySelector('.details');
 const stats = document.querySelector('.stats');
 const progress = document.querySelector('.progress-value');
@@ -15,7 +14,6 @@ pokeApi.getPokemonsDetail({ url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}
 
         idPokemon.innerHTML = convertIdPokemonToHtml(pokemon);
         infoPokemon.innerHTML = convertInfoPokemonToHtml(pokemon);
-        moreInfoPokemon.innerHTML = convertBreedPokemonToHtml(pokemon);
         stats.innerHTML += convertStatsPokemonToHtml(pokemon);
         updateBackgroundColor(pokemon.type);
     })
@@ -62,11 +60,6 @@ function convertInfoPokemonToHtml(pokemon) {
             <span>Abilities</span>
             <span>${pokemon.abilities}</span>
         </li>
-    `
-}
-
-function convertBreedPokemonToHtml(pokemon) {
-    return `
         <li class="info">
             <span>Gender</span>
             <span>${pokemon.genders}</span>
@@ -75,14 +68,9 @@ function convertBreedPokemonToHtml(pokemon) {
             <span>Egg Groups</span>
             <span>${pokemon.eggGroups}</span>
         </li>
-        <!--
-        <li class="info">
-            <span>Egg Cycles</span>
-            <span>${pokemon.eggCycles}</span>
-        </li>
-        --!>
     `
 }
+
 
 function convertStatsPokemonToHtml(pokemon) {
     let html = '';
@@ -109,18 +97,26 @@ function updateBackgroundColor(type) {
     contentDetail.classList.add(type.toLowerCase());
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const detailOptions = document.querySelectorAll('.detail-options .options');
-//     const contentSections = document.querySelectorAll('.info-pokemon, .stats'); 
+document.addEventListener('DOMContentLoaded', function() {
+    const detailOptions = document.querySelectorAll('.detail-options span'); 
+    const contentSections = document.querySelectorAll('.info-pokemon, .stats, .evolution'); 
 
-//     detailOptions.forEach((option, index) => {
-//         option.addEventListener('click', function() {
-//             contentSections.forEach(section => {
-//                 section.style.display = 'none';
-//                 section.style.borderBottom = '2px solid #6F7BDB';
-//             });
-//             contentSections[index].style.display = 'block';
-//         });
-//     });
-// });
+    contentSections[0].style.display = 'block';
+    contentSections[1].style.display = 'none';
+    contentSections[2].style.display = 'none';
+    detailOptions[0].style.borderBottom = '2px solid #6F7BDB'; 
+
+    detailOptions.forEach((option, index) => {
+        option.addEventListener('click', function() {
+            detailOptions.forEach(opt => opt.style.borderBottom = 'none');
+            detailOptions[index].style.borderBottom = '2px solid #6F7BDB';
+
+            contentSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            contentSections[index].style.display = 'block';
+        });
+    });
+});
 
